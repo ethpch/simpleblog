@@ -1,0 +1,83 @@
+<!-- templates board.html -->
+{% extends "base.html" %}
+{% load staticfiles %}
+<!-- template rewrite -->
+{% block content %}
+<main class="r_box">
+    <!-- board list -->
+    <div class="gbook">
+        {% for list in pageInfo.object_list %}
+        <div class="fb">
+            <ul style="background: url({% static "images/user.jpg" %}) no-repeat top 20px left 10px;">
+                <p class="fbtime"><span>{{ list.created|date:"Y-m-d" }}</span>{{ list.name }}</p>
+                <p class="fbinfo">{{ list.content }}</p>
+            </ul>
+        </div>
+        {% endfor %}
+        <!-- paging -->
+        <div class="pagelist">
+            {% if pageInfo.has_previous %}
+            <a href="{% url 'board' id pageInfo.previous_page_number %}">上一页</a>
+            {% endif %}
+            {% if pageInfo.object_list %}
+                {% for page in pageInfo.paginator.page_range %}
+                    {% if pageInfo.number == page %}
+                    <a href="javascript:;" class="curPage">{{ page }}</a>
+                    {% else %}
+                    <a href="{% url 'board' id page %}">{{ page }}</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if pageInfo.has_next %}
+            <a href="{% url 'board' id pageInfo.next_page_number %}">下一页</a>
+            {% endif %}
+        </div>
+        <hr />
+        <!-- web form -->
+        <div class="gbox">
+            <form action="" method="post" name="saycomment" onsubmit="return CheckComment(document.saycomment)">
+                {% csrf_token %}
+                <p><strong>来说点什么吧...</strong></p>
+                <p>
+                    <span>你的姓名：</span>
+                    <input name="name" type="text" id="name" />
+                *</p>
+                <p>
+                    <span>联系邮箱：</span>
+                    <input name="email" type="text" id="email" />
+                *</p>
+                <p>
+                    <span class="tnr">留言内容：</span>
+                    <textarea name="content" cols="60" rows="12" id="lytext"></textarea>
+                </p>
+                <p>
+                    <input type="submit" name="Submit3" value="提交" />
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
+<!-- template rewrite -->
+{% block script %}
+<script>
+    function CheckComment(obj) {
+        if (obj.lytext.value == "") {
+            alert("请写下你想说的话");
+            obj.lytext.focus();
+            return false;
+        }
+        if (obj.name.value == "") {
+            alert("请写下你的名字");
+            obj.name.focus();
+            return false;
+        }
+        if (obj.email.value == "") {
+            alert("请写下你的邮箱地址");
+            obj.email.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock %}

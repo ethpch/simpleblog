@@ -1,0 +1,87 @@
+<!-- templates detail.html -->
+{% extends "base.html" %}
+{% load staticfiles %}
+<!-- template rewrite -->
+{% block content %}
+<main>
+    <div class="infosbox">
+        <div class="newsview">
+            <!-- article title -->
+            <h3 class="news_title">{{ ats.title }}</h3>
+            <!-- author, published time, reading quantities -->
+            <div class="bloginfo">
+                <ul>
+                    <li class="author">作者： <a href="javascript:;">{{ user.name }}</a></li>
+                    <li class="timer">时间： {{ ats.created|date:"Y-m-d" }}</li>
+                    <li class="view">阅读量： {{ ats.reading }}</li>
+                </ul>
+            </div>
+            <!-- article tags -->
+            <div class="tags">
+                {% for t in atags %}
+                <a href="javascript:;">{{ t }}</a>
+                {% endfor %}
+            </div>
+            <!-- article content -->
+            <div class="news_con">
+                {{ ats.content|safe }}
+            </div>
+        </div>
+        <div class="news_com">
+            <h2>文章评论</h2>
+            <div class="gbko">
+                <!-- comment -->
+                {% for c in cms %}
+                <div class="fb">
+                    <ul style="background: url({% static "images/user.jpg" %}) no-repeat top 20px left 10px;">
+                        <p class="fbtime">
+                            <span>{{ c.created|date:"Y-m-d" }}</span>
+                            {{ c.commentator }}
+                        </p>
+                        <p class="fbinfo">
+                            {{ c.content }}
+                        </p>
+                    </ul>
+                </div>
+                {% endfor %}
+                <!-- web form for submiting comment -->
+                <form action="" method="post" name="saycom" onsubmit="return CheckCom(document.saycom)">
+                    <div id="compost">
+                        {% csrf_token %}
+                        <p class="saying">
+                            <span>
+                                <a href="javascript:;">共有{{ cms|length }}条评论</a>
+                            </span>
+                            来说两句吧...
+                        </p>
+                        <p class="yname">
+                            <span>名称：</span>
+                            <input name="name" id="name" type="text" class="inputText" size="16" />
+                        </p>
+                        <textarea name="content" rows="6" id="saytext"></textarea>
+                        <input name="submit" type="submit" value="提交" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+<!-- template rewrite -->
+{% block script %}
+<script>
+    function CheckCom(obj) {
+        if (obj.saytext.value == "") {
+            alert("请写下你想说的话");
+            obj.saytext.focus();
+            return false;
+        }
+        if (obj.name.value == "") {
+            alert("请写下你的名字");
+            obj.name.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock %}

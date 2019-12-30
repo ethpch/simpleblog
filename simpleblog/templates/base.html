@@ -1,0 +1,96 @@
+<!-- templates base.html-->
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8" />
+    <title>{% block title %}我的博客{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet" />
+    <link href="{% static "css/index.css" %}" rel="stylesheet" />
+    <link href="{% static "css/m.css" %}" rel="stylesheet" />
+    <link href="{% static "css/info.css" %}" rel="stylesheet" />
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/comm.js" %}"></script>
+    <script src="{% static "js/modernizr.js" %}"></script>
+    <script src="{% static "js/scrollReveal.js" %}"></script>
+</head>
+<body>
+    <header class="header-navigation" id="header">
+        <nav>
+            <div class="logo">
+                <a href="javascript:;">博客首页</a>
+            </div>
+            <h2 id="mnavh"><span class="navicon"></span></h2>
+            <ul id="starlist">
+                <li><a href="{% url 'article' id 1 %}">我的日记</a></li>
+                <li><a href="{% url 'album' id 1 %}">我的相册</a></li>
+                <li><a href="{% url 'about' id %}">关于我</a></li>
+                <li><a href="{% url 'board' id 1 %}">留言</a></li>
+                <li><a href="{% url 'admin:index' %}">博客后台管理</a></li>
+            </ul>
+        </nav>
+    </header>
+    <article>
+    {% block body %}
+        <aside class="l_box">
+            <div class="about_me">
+                <h2>关于我</h2>
+                <ul>
+                    {% if user.photo %}
+                    <i><img src="{{ user.photo.url }}" /></i>
+                    {% else %}
+                    <i><img src="{% static 'images/user.jpg' %}" /></i>
+                    {% endif %}
+                    <p>
+                        <b>{{ user.name }}</b>, {{ user.introduce }}
+                    </p>
+                </ul>
+            </div>
+            <div class="my_album">
+                <h2>我的相册</h2>
+                <ul>
+                    {% for a in album %}
+                    <li>
+                        <a href="javascript:;">
+                            <img src="{{ a.photo.url }}" />
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="classification">
+                <h2>文章分类</h2>
+                <ul>
+                    {% for t in tag %}
+                    <li><a href="/">{{ t.tag }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="ads">
+                <h2>推荐</h2>
+                <ul>
+                    <li>
+                        <a href="https://www.github.com/" target="new">GitHub</a>
+                    </li>
+                    <li>
+                        <a href="https://www.djangoproject.com/" target="new">DjangoProject</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="links">
+                <h2>友情链接</h2>
+                <ul>
+                    <li>
+                        <a href="https://www.github.com/" target="new">Github</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    {% endblock %}
+    {% block content %} {% endblock %}
+    </article>
+    <a href="#" class="cd-top">Top</a>
+    {% block script %} {% endblock %}
+</body>
+</html>

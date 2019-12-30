@@ -1,0 +1,68 @@
+<!-- templates user.html -->
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static "css/reset.css" %}" />
+    <link rel="stylesheet" href="{% static "css/user.css" %}" />
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/user.js" %}"></script>
+</head>
+<body>
+    <div class="page">
+        <div class="loginwarrp">
+            <div class="logo">{{ pageTitle }}</div>
+            <div class="login_form">
+                <form name="Login" method="post" action="">
+                    {% csrf_token %}
+                    <li class="login-item">
+                        <span>用户名： </span>
+                        <input type="text" name="username" class="login_input" />
+                        <span id="count-msg" class="error"></span>
+                    </li>
+                    <li class="login-item">
+                        <span>密码： </span>
+                        <input type="password" name="password" class="login_input" />
+                        <span id="password-msg" class="error"></span>
+                    </li>
+                    {% if confirmPassword %}
+                    <li class="login-item">
+                        <span>确认密码： </span>
+                        <input type="password" name="cp" class="login_input" />
+                        <span id="password-msg" class="error"></span>
+                    </li>
+                    {% endif %}
+                    <div>{{ tips }}</div>
+                    <li class="login-sub">
+                        <input type="submit" name="Submit" value="{{ button }}" />
+                        <div class="turn-url">
+                            <a style="color: #45B572;" href="{% url urlName %}">{{ urlText }}</a>
+                        </div>
+                    </li>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.onload = function () {
+            var config = {
+                vx: 4,
+                vy: 4,
+                height: 2,
+                width: 2,
+                count: 100,
+                color: "121, 162, 185",
+                stroke: "100, 200, 180",
+                dist: 6000,
+                e_dist: 20000,
+                max_conn: 10
+            }
+            CanvasParticle(config);
+        }
+    </script>
+    <script src="{% static "js/canvas-particle.js" %}"></script>
+</body>
+</html>

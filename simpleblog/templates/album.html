@@ -1,0 +1,59 @@
+<!-- templates album.html -->
+{% extends "base.html" %}
+<!-- template rewrite -->
+{% block body %} {% endblock %}
+<!-- template rewrite -->
+{% block content %}
+<article>
+    <div class="picbox">
+        {% for list in pageInfo.object_list %}
+        <div class="picvalue" data-scroll-reveal="enter bottom over ls">
+            <a href="javascript:;">
+                <!-- list.photo.url is path of model character -->
+                <i><img src="{{ list.photo.url }}" /></i>
+                <div class="picinfo">
+                    {% if list.title %}
+                    <h3>{{ list.title }}</h3>
+                    {% else %}
+                    <h3>相册图片</h3>
+                    {% endif %}
+                    {% if list.introduce %}
+                    <span>{{ list.introduce }}</span>
+                    {% else %}
+                    <span>图片简介</span>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- paging -->
+    <div class="pagelist">
+        {% if pageInfo.has_previous %}
+        <a href="{% url 'album' id pageInfo.previous_page_number %}">上一页</a>
+        {% endif %}
+        {% for page in pageInfo.paginator.page_range %}
+            {% if pageInfo.number == page %}
+            <a href="javascript:;" class="curPage">{{ page }}</a>
+            {% else %}
+            <a href="{% url 'album' id page %}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if pageInfo.has_next %}
+        <a href="{% url 'album' id pageInfo.next_page_number %}">下一页</a>
+        {% endif %}
+    </div>
+</article>
+{% endblock %}
+<!-- template rewrite -->
+{% block script %}
+<script>
+    if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+        {
+            function() {
+                window.scrollReveal = new scrollReveal({ reset: true });
+            }
+        ) ();
+        };
+</script>
+{% endblock %}

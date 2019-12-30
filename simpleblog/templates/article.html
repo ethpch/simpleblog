@@ -1,0 +1,42 @@
+<!-- templates article.html -->
+{% extends "base.html" %}
+{% load staticfiles %}
+<!-- template rewrite -->
+{% block content %}
+<!-- article list -->
+<main class="r_box">
+    {% for list in pageInfo.object_list %}
+    <li>
+        <i>
+            <a href="{% url 'detail' id list.id %}">
+                {% if list.articlephoto %}
+                <img src="{{ list.articlephoto.url }}" />
+                {% else %}
+                <img src="{% static 'images/pic.png' %}" />
+                {% endif %}
+            </a>
+        </i>
+        <h3>
+            <a href="{% url 'detail' id list.id %}">{{ list.title }}</a>
+         </h3>
+        <p>{{ list.content|safe }}</p>
+    </li>
+    {% endfor %}
+    <!-- paging -->
+    <div class="pagelist">
+        {% if pageInfo.has_previous %}
+        <a href="{% url 'article' id pageInfo.previous_page_number %}">上一页</a>
+        {% endif %}
+        {% for page in pageInfo.paginator.page_range %}
+            {% if pageInfo.number == page %}
+            <a href="javascript:;" class="curPage">{{ page }}</a>
+            {% else %}
+            <a href="{% url 'article' id page %}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if pageInfo.has_next %}
+        <a href="{% url 'article' id pageInfo.next_page_number %}">下一页</a>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
