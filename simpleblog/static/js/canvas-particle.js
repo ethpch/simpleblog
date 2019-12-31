@@ -87,7 +87,7 @@ var CanvasParticle = (function () {
 					vy: canvas.config.vy / 2 - Math.random() * canvas.config.vy
 				}
 			} else {
-				// 处理球的速度和位置，并且做边界处理process balls' speed and position, and adapt border
+				// process balls' speed and position, and adapt border
 				point = borderPoint(canvas.points[i], canvas);
 			}
 			context.fillRect(point.x - canvas.config.width / 2, point.y - canvas.config.height / 2, canvas.config.width, canvas.config.height);

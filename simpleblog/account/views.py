@@ -31,7 +31,7 @@ def register(request):
             d = {
                 'username': u,
                 'password': p,
-                'is_superuser':1,
+                'is_superuser':0,
                 'is_staff':1
             }
             user = BlogUser.objects.create_user(**d)
