@@ -31,7 +31,7 @@ def register(request):
             d = {
                 'username': u,
                 'password': p,
-                'is_superuser':0,
+                'is_superuser':1,
                 'is_staff':1
             }
             user = BlogUser.objects.create_user(**d)
@@ -58,14 +58,14 @@ def userLogin(request):
                     login(request, user)
                     kwargs = {'id': request.user.id, 'page': 1}
                     return redirect(reverse('article', kwargs=kwargs))
-                else:
-                    tips = '账号密码错误，请重新输入'
             else:
-                tips = '用户不存在，请注册'
+                tips = '账号密码错误，请重新输入'
         else:
-            if request.user.username:
-                kwargs = {'id': request.user.id, 'page': 1}
-                return redirect(reverse('article', kwargs=kwargs))
+            tips = '用户不存在，请注册'
+    else:
+        if request.user.username:
+            kwargs = {'id': request.user.id, 'page': 1}
+            return redirect(reverse('article', kwargs=kwargs))
     return render(request, 'user.html', locals())
 
 def about(request, id):
