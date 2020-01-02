@@ -5,23 +5,25 @@
 {% block content %}
 <!-- article list -->
 <main class="r_box">
-    {% for list in pageInfo.object_list %}
-    <li>
-        <i>
-            <a href="{% url 'detail' id list.id %}">
-                {% if list.articlephoto %}
-                <img src="{{ list.articlephoto.url }}" />
-                {% else %}
-                <img src="{% static 'images/pic.png' %}" />
-                {% endif %}
-            </a>
-        </i>
-        <h3>
-            <a href="{% url 'detail' id list.id %}">{{ list.title }}</a>
-         </h3>
-        <p>{{ list.content|safe }}</p>
-    </li>
-    {% endfor %}
+    <ul>
+        {% for list in pageInfo.object_list %}
+        <li>
+            <i>
+                <a href="{% url 'detail' id list.id %}">
+                    {% if list.articlephoto %}
+                    <img src="{{ list.articlephoto.url }}" />
+                    {% else %}
+                    <img src="{% static 'images/pic.png' %}" />
+                    {% endif %}
+                </a>
+            </i>
+            <h3>
+                <a href="{% url 'detail' id list.id %}">{{ list.title }}</a>
+             </h3>
+            <p>{{ list.content|safe }}</p>
+        </li>
+        {% endfor %}
+    </ul>
     <!-- paging -->
     <div class="pagelist">
         {% if pageInfo.has_previous %}

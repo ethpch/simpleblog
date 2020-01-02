@@ -326,6 +326,7 @@
     <Content Include="publicStatic\images\user.jpg" />
     <Content Include="publicStatic\js\canvas-particle.js" />
     <Content Include="publicStatic\js\comm.js" />
+    <Content Include="publicStatic\js\imgShow.js" />
     <Content Include="publicStatic\js\jquery.min.js" />
     <Content Include="publicStatic\js\modernizr.js" />
     <Content Include="publicStatic\js\page.js" />

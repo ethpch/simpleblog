@@ -5,12 +5,17 @@
 <!-- template rewrite -->
 {% block content %}
 <article>
+    <div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+        <div id="innerdiv" style="position:absolute;">
+            <img id="bigimg" style="border:5px solid #fff;" src="" />
+        </div>
+    </div>
     <div class="picbox">
         {% for list in pageInfo.object_list %}
         <div class="picvalue" data-scroll-reveal="enter bottom over ls">
             <a href="javascript:;">
                 <!-- list.photo.url is path of model character -->
-                <i><img src="{{ list.photo.url }}" /></i>
+                <i><img class="cimg" src="{{ list.photo.url }}" /></i>
                 <div class="picinfo">
                     {% if list.title %}
                     <h3>{{ list.title }}</h3>
@@ -45,8 +50,6 @@
     </div>
 </article>
 {% endblock %}
-<!-- template rewrite -->
-{% block script %}
 <script>
     if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
         (
@@ -56,4 +59,3 @@
         ) ();
         };
 </script>
-{% endblock %}
