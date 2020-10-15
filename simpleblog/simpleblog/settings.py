@@ -87,9 +87,9 @@ WSGI_APPLICATION = 'simpleblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blogdb',
+        'NAME': 'testdb',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '&0x5F375A86',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -142,3 +142,5 @@ CKEDITOR_CONFIGS = {
 }
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_BROWSE_SHOW_DIRS = True
+
+FILE_UPLOAD_PERMISSIONS = 0o664

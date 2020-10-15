@@ -6,7 +6,8 @@
     <RootNamespace>simpleblog</RootNamespace>
     <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
     <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
-    <InterpreterId>CondaEnv|CondaEnv|webproject</InterpreterId>
+    <InterpreterId>CondaEnv|CondaEnv|webproj</InterpreterId>
+    <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -1612,6 +1613,7 @@
     <Content Include="static\images\user.jpg" />
     <Content Include="static\js\canvas-particle.js" />
     <Content Include="static\js\comm.js" />
+    <Content Include="static\js\imgShow.js" />
     <Content Include="static\js\jquery.min.js" />
     <Content Include="static\js\modernizr.js" />
     <Content Include="static\js\page.js" />
@@ -1633,7 +1635,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="CondaEnv|CondaEnv|webproject" />
+    <InterpreterReference Include="CondaEnv|CondaEnv|webproj" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

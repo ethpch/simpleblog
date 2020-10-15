@@ -50,7 +50,7 @@ class CommentAdmin(admin.ModelAdmin):
     # set data access rights according to current user
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        return qs.filter(user_id=request.user.id)
+        return qs.filter(article__author__id=request.user.id)
     # set foreign key when add or modify data
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'article':
